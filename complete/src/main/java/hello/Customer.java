@@ -1,10 +1,14 @@
 // tag::sample[]
 package hello;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.Columns;
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Customer {
@@ -15,18 +19,22 @@ public class Customer {
     private String firstName;
     private String lastName;
 
+    @Type(type = "hello.PhoneNumberType")
+    private PhoneNumber phoneNumber;
+
     protected Customer() {}
 
-    public Customer(String firstName, String lastName) {
+    public Customer(String firstName, String lastName, PhoneNumber phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
+                "Customer[id=%d, firstName='%s', lastName='%s', phoneNumber=%s]",
+                id, firstName, lastName, phoneNumber);
     }
 
 // end::sample[]
@@ -42,5 +50,9 @@ public class Customer {
 	public String getLastName() {
 		return lastName;
 	}
+
+    public PhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
 }
 
