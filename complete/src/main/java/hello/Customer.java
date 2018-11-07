@@ -19,7 +19,7 @@ public class Customer {
     private String firstName;
     private String lastName;
 
-    @Type(type = "hello.PhoneNumberType")
+    @Type(type = "hello.JsonType")
     private PhoneNumber phoneNumber;
 
     protected Customer() {}
